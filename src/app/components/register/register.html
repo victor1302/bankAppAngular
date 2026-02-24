@@ -1,0 +1,81 @@
+<main>
+  <mat-card class="form-card">
+    <p class="login-name">Register</p>
+    <form class="login-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" placeholder="Seu usuário" />
+        @if(registerForm.get('username')?.hasError('required')){
+          <mat-error>Username is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Sua senha" />
+        @if(registerForm.get('password')?.hasError('required')){
+          <mat-error>Password is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Phone number</mat-label>
+        <input matInput formControlName="phoneNumber" placeholder="(11) 99999-9999" />
+        @if(registerForm.get('phoneNumber')?.hasError('required')){
+          <mat-error>Phone number is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Seu endereço" />
+        @if(registerForm.get('address')?.hasError('required')){
+          <mat-error>Address is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Seu email" />
+        @if(registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')){
+          <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if(registerForm.get('email')?.hasError('required')){
+          <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" formControlName="age" placeholder="Sua idade" />
+        @if(registerForm.get('age')?.hasError('required')){
+          <mat-error>Age is <strong>required</strong></mat-error>
+        }
+        @if(registerForm.get('age')?.hasError('min')){
+          <mat-error>Age must be a positive number</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>User type</mat-label>
+        <mat-select formControlName="userType">
+          <mat-option value="TEST">TEST</mat-option>
+          <mat-option value="NORMAL">NORMAL</mat-option>
+        </mat-select>
+        @if(registerForm.get('userType')?.hasError('required')){
+          <mat-error>User type is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <p>
+        Já tem conta?
+        <a routerLink="/login" class="register-link">Voltar para login</a>
+      </p>
+
+      <button mat-raised-button type="submit" [disabled]="registerForm.invalid">
+        Register
+      </button>
+    </form>
+  </mat-card>
+</main>
