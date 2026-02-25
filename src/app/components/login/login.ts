@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import {MatFormField, MatLabel, MatInput, MatError} from '@angular/material/input';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatCard} from '@angular/material/card';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
-import {RouterLink} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {RouterLink, Router} from '@angular/router';
 import {UserService} from '../../services/user-service';
 
 
@@ -28,7 +27,8 @@ export class Login {
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService){
+              private userService: UserService,
+              private router: Router){
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['',[Validators.required]]
@@ -42,7 +42,9 @@ export class Login {
     const body = this.loginForm.value;
 
     this.userService.login(body).subscribe({
-      next: (res) => console.log('ok', res),
+      next: (res) => {
+        this.router.navigate(['/home']);
+      },
       error: (err) => console.error('Error', err),
     });
   }

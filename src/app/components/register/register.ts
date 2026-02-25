@@ -5,7 +5,7 @@ import { MatCard } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 import {UserService} from '../../services/user-service';
 import {UserRegisterRequest} from '../../../dtos/UserRegisterRequest';
 
@@ -31,7 +31,8 @@ export class Register {
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -51,7 +52,9 @@ export class Register {
     const body:UserRegisterRequest = this.registerForm.value;
 
     this.userService.register(body).subscribe({
-      next: (res) => console.log('ok', res),
+      next: (res) => {
+        this.router.navigate(['/login']);
+      },
       error: (err) => console.error('Error', err),
     });
   }
