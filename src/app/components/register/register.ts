@@ -5,6 +5,9 @@ import { MatCard } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {UserService} from '../../services/user-service';
+import {UserRegisterRequest} from '../../../dtos/UserRegisterRequest';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +30,8 @@ export class Register {
 
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService) {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -44,8 +48,11 @@ export class Register {
       this.registerForm.markAllAsTouched();
       return;
     }
+    const body:UserRegisterRequest = this.registerForm.value;
 
-    const value = this.registerForm.value;
-    console.log('Register form submit', value);
+    this.userService.register(body).subscribe({
+      next: (res) => console.log('ok', res),
+      error: (err) => console.error('Error', err),
+    });
   }
 }

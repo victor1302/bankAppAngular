@@ -4,6 +4,8 @@ import {MatCard, MatCardContent} from '@angular/material/card';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {UserService} from '../../services/user-service';
 
 
 @Component({
@@ -25,7 +27,8 @@ export class Login {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder){
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService){
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['',[Validators.required]]
@@ -36,8 +39,12 @@ export class Login {
       this.loginForm.markAllAsTouched();
       return;
     }
-    const { email, password} = this.loginForm.value;
-    console.log(email, password);
+    const body = this.loginForm.value;
+
+    this.userService.login(body).subscribe({
+      next: (res) => console.log('ok', res),
+      error: (err) => console.error('Error', err),
+    });
   }
 
 }
