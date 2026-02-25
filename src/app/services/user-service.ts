@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {UserRegisterRequest} from '../../dtos/UserRegisterRequest';
 import {UserLoginRequest} from '../../dtos/UserLoginRequest';
+import {UserLoginResponse} from '../../dtos/UserLoginResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,6 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/auth/register`, body);
   }
   login(body: UserLoginRequest){
-    return this.http.post(`${this.baseUrl}/auth/login`, body);
+    return this.http.post<UserLoginResponse>(`${this.baseUrl}/auth/login`, body);
   }
 }

@@ -5,6 +5,9 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {MatButton} from '@angular/material/button';
 import {RouterLink, Router} from '@angular/router';
 import {UserService} from '../../services/user-service';
+import {AuthService} from '../../services/auth-service';
+import {UserLoginResponse} from '../../../dtos/UserLoginResponse';
+import {UserLoginRequest} from '../../../dtos/UserLoginRequest';
 
 
 @Component({
@@ -28,7 +31,8 @@ export class Login {
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private router: Router){
+              private router: Router,
+              private authService: AuthService){
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['',[Validators.required]]
@@ -39,10 +43,11 @@ export class Login {
       this.loginForm.markAllAsTouched();
       return;
     }
-    const body = this.loginForm.value;
+    const body:UserLoginRequest = this.loginForm.value;
 
     this.userService.login(body).subscribe({
       next: (res) => {
+        this.authService.setToken(res.token);
         this.router.navigate(['/home']);
       },
       error: (err) => console.error('Error', err),
