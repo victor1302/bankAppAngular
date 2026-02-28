@@ -6,8 +6,8 @@ import { MatButton } from '@angular/material/button';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import {Router} from '@angular/router';
-import {UserService} from '../../services/user-service';
-import {UserRegisterRequest} from '../../../dtos/UserRegisterRequest';
+import {UserService} from '../../../core/services/user-service';
+import {UserRegisterRequest} from '../../../core/models/UserRegisterRequest';
 
 @Component({
   selector: 'app-register',

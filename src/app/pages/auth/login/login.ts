@@ -4,10 +4,10 @@ import {MatCard} from '@angular/material/card';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {RouterLink, Router} from '@angular/router';
-import {UserService} from '../../services/user-service';
-import {AuthService} from '../../services/auth-service';
-import {UserLoginResponse} from '../../../dtos/UserLoginResponse';
-import {UserLoginRequest} from '../../../dtos/UserLoginRequest';
+import {UserService} from '../../../core/services/user-service';
+import {AuthService} from '../../../core/services/auth-service';
+import {UserLoginResponse} from '../../../core/models/UserLoginResponse';
+import {UserLoginRequest} from '../../../core/models/UserLoginRequest';
 
 
 @Component({

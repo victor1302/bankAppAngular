@@ -52,12 +52,15 @@ Principais arquivos/pastas:
 - `src/app/app.ts` – componente raiz da aplicação
 - `src/app/app.config.ts` – configuração global (routers, providers, etc.)
 - `src/app/app.routes.ts` – definição das rotas
-- `src/app/components/login` – tela de login
-- `src/app/components/register` – tela de registro
-- `src/app/components/home` – tela inicial (dashboard) protegida por autenticação
-- `src/app/security` – guardas de rota e interceptors de segurança (por exemplo, `AuthGuard`, `AuthInterceptor`)
-- `src/app/services` – services para comunicação com a API (ex.: `login`, `register`, `dashboard`, etc.)
-- `src/app/dtos` – tipos/DTOs usados na comunicação com a API
+- `src/app/core/` – módulo core (singletons: services, guards, models)
+  - `src/app/core/services/` – services para comunicação com a API (ex.: `AuthService`, `UserService`)
+  - `src/app/core/guards/` – guardas de rota (ex.: `AuthGuard`)
+  - `src/app/core/models/` – tipos/DTOs usados na comunicação com a API
+- `src/app/pages/` – páginas da aplicação organizadas por feature
+  - `src/app/pages/auth/login/` – tela de login
+  - `src/app/pages/auth/register/` – tela de registro
+  - `src/app/pages/home/` – tela inicial (dashboard) protegida por autenticação
+- `src/environments/` – configuração de ambiente (URL da API, etc.)
 
 ## Rotas
 
@@ -123,7 +126,7 @@ export const environment = {
 E usar essa constante nos services:
 
 ```ts
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {

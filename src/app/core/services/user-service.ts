@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {UserRegisterRequest} from '../../dtos/UserRegisterRequest';
-import {UserLoginRequest} from '../../dtos/UserLoginRequest';
-import {UserLoginResponse} from '../../dtos/UserLoginResponse';
+import {environment} from '../../../environments/environment';
+import {UserRegisterRequest} from '../models/UserRegisterRequest';
+import {UserLoginRequest} from '../models/UserLoginRequest';
+import {UserLoginResponse} from '../models/UserLoginResponse';
 
 @Injectable({
   providedIn: 'root',
