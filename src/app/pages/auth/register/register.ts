@@ -1,38 +1,29 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormField, MatLabel, MatInput, MatError } from '@angular/material/input';
-import { MatCard } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
-import { MatSelect, MatOption } from '@angular/material/select';
-import { RouterLink } from '@angular/router';
-import {Router} from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import {UserService} from '../../../core/services/user-service';
 import {UserRegisterRequest} from '../../../core/models/UserRegisterRequest';
+import {ThemeService} from '../../../core/services/theme-service';
 
 @Component({
   selector: 'app-register',
   imports: [
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatError,
-    MatCard,
-    MatButton,
-    MatSelect,
-    MatOption,
     RouterLink
   ],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
 export class Register {
+  readonly lightTheme = 'light';
+  readonly blackTheme = 'black';
 
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private themeService: ThemeService) {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -57,5 +48,12 @@ export class Register {
       },
       error: (err) => console.error('Error', err),
     });
+  }
+  //service to change theme
+  onToggleTheme(): void{
+    this.themeService.toggle(this.lightTheme, this.blackTheme);
+  }
+  isAltTheme(): boolean{
+    return this.themeService.getTheme() === this.blackTheme;
   }
 }

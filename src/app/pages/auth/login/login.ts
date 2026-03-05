@@ -1,38 +1,32 @@
 import {Component} from '@angular/core';
-import {MatFormField, MatLabel, MatInput, MatError} from '@angular/material/input';
-import {MatCard} from '@angular/material/card';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatButton} from '@angular/material/button';
 import {RouterLink, Router} from '@angular/router';
 import {UserService} from '../../../core/services/user-service';
 import {AuthService} from '../../../core/services/auth-service';
-import {UserLoginResponse} from '../../../core/models/UserLoginResponse';
 import {UserLoginRequest} from '../../../core/models/UserLoginRequest';
+import {ThemeService} from '../../../core/services/theme-service';
 
 
 @Component({
   selector: 'app-login',
   imports: [
-    MatFormField,
-    MatLabel,
-    MatInput,
     ReactiveFormsModule,
-    MatError,
-    MatCard,
-    MatButton,
     RouterLink
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
+  readonly lightTheme = 'light';
+  readonly blackTheme = 'black';
 
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private router: Router,
-              private authService: AuthService){
+              private authService: AuthService,
+              private themeService: ThemeService){
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['',[Validators.required]]
@@ -52,6 +46,14 @@ export class Login {
       },
       error: (err) => console.error('Error', err),
     });
+  }
+
+  //service to change theme
+  onToggleTheme(): void{
+    this.themeService.toggle(this.lightTheme, this.blackTheme);
+  }
+  isAltTheme(): boolean{
+    return this.themeService.getTheme() === this.blackTheme;
   }
 
 }

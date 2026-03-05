@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.sidebar-nav {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100%;
+}
+
+.sidebar-nav a {
+  display: block !important;
+  width: 100%;
+}

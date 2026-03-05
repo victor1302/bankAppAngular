@@ -1,20 +1,2 @@
-main{
-  display: flex;
-  align-content: center;
-}
-
-.form-card{
-  min-width: 400px;
-  min-height: 400px;
-}
-
-.login-form{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.full-width{
-  width: 100%;
-}
+/* DaisyUI + Tailwind handles all styling via utility classes */
 
