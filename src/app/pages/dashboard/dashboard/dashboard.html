@@ -1,9 +1,8 @@
 <div style="display:flex; height:100vh; overflow:hidden;">
 
-  <!-- Sidebar (left) -->
-  <aside style="display:flex; flex-direction:column; width:260px; flex-shrink:0; transition:width 0.3s ease; overflow:hidden;"
-         [style.width]="sidebarOpen ? '260px' : '0px'"
-         class="bg-base-100 border-r border-base-300">
+
+  <aside class="flex flex-col place-content-between w-[260px] shrink-0 transition-[width] duration-300 ease-in-out overflow-hidden bg-base-100 border-r border-base-300"
+         [style.width]="sidebarOpen ? '260px' : '0px'">
     <div style="padding:16px; display:flex; flex-direction:column; gap:4px;">
       <p class="text-xs font-semibold text-base-content/50 uppercase px-2 mb-2">Menu</p>
       <a class="btn btn-ghost w-full justify-start">Dashboard</a>
@@ -11,12 +10,22 @@
       <a class="btn btn-ghost w-full justify-start">Transactions</a>
       <a class="btn btn-ghost w-full justify-start">Settings</a>
     </div>
+    <div class="flex flex-row items-center gap-3 p-5">
+      <div class="avatar">
+        <div class="w-12 h-12 rounded-full">
+          <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
+        </div>
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="font-semibold text-sm">{{userProjection?.username}}</span>
+        <span class="text-xs text-base-content/60">{{userProjection?.email}}</span>
+      </div>
+    </div>
   </aside>
 
-  <!-- Right side (navbar + content) -->
+
   <div style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
 
-    <!-- Navbar -->
     <div class="navbar bg-base-100 shadow-sm" style="flex-shrink:0;">
       <div class="flex-1">
         <button class="btn btn-ghost btn-square mr-2" (click)="sidebarOpen = !sidebarOpen">
@@ -27,7 +36,6 @@
         <a class="btn btn-ghost text-xl">pagaAi</a>
       </div>
 
-      <!-- Theme toggle -->
       <label class="swap swap-rotate">
         <input type="checkbox" class="theme-controller" [checked]="isAltTheme()" (change)="onToggleTheme()" />
         <svg class="swap-off h-10 w-10 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -41,7 +49,21 @@
 
     <!-- Page content -->
     <main style="flex:1; overflow-y:auto;" class="bg-base-200 p-4">
-      Dashboard content...
+      <div class="card w-full max-w-md bg-primary text-primary-content rounded-2xl shadow-xl">
+        <div class="card-body p-6 flex flex-col gap-4">
+          <h2 class="card-title text-lg md:text-xl">Payment card</h2>
+          <div class="space-y-1">
+            <p class="text-[11px] uppercase tracking-[0.18em] opacity-80">Card Number</p>
+            <p class="text-lg md:text-xl font-semibold tracking-[0.22em]">
+              6771 · 8911 · 1777 · 2802
+            </p>
+          </div>
+          <div class="mt-2 space-y-1">
+            <p class="text-[11px] uppercase tracking-[0.18em] opacity-80">Balance</p>
+            <p class="text-2xl font-bold">R$ 2.000,02</p>
+          </div>
+        </div>
+      </div>
     </main>
 
   </div>
