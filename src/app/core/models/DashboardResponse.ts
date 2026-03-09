@@ -14,7 +14,6 @@ export interface UserProjection{
   address: string;
 }
 
-//fazer essa parte
 export interface CardProjection{
   pan: string;
   cvv: string;
@@ -22,4 +21,5 @@ export interface CardProjection{
 }
 export interface DashboardResponse{
   userProjection: UserProjection;
+  cardProjection: CardProjection;
 }

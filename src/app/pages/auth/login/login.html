@@ -26,8 +26,14 @@
       </svg>
     </label>
   </div>
-
+  <!-- not here !-->
+  @if(loginError){
+    <div role="alert" class="alert alert-error alert-outline">
+      <span>Credenciais Invalidos!.</span>
+    </div>
+  }
 <main class="flex-1 flex items-center justify-center">
+
   <div class="card w-full max-w-md bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="card-title justify-center text-2xl font-bold mb-6">Login</h2>
@@ -81,5 +87,8 @@
       </form>
     </div>
   </div>
+
 </main>
+
 </div>
+

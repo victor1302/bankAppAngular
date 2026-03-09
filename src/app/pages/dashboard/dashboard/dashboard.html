@@ -48,22 +48,78 @@
     </div>
 
     <!-- Page content -->
-    <main style="flex:1; overflow-y:auto;" class="bg-base-200 p-4">
-      <div class="card w-full max-w-md bg-primary text-primary-content rounded-2xl shadow-xl">
-        <div class="card-body p-6 flex flex-col gap-4">
-          <h2 class="card-title text-lg md:text-xl">Payment card</h2>
-          <div class="space-y-1">
-            <p class="text-[11px] uppercase tracking-[0.18em] opacity-80">Card Number</p>
-            <p class="text-lg md:text-xl font-semibold tracking-[0.22em]">
-              6771 · 8911 · 1777 · 2802
-            </p>
+    <main style="flex:1; overflow-y:auto;" class="bg-base-200 p-6">
+
+      <!-- Container branco estilo foto -->
+      <div class="bg-base-100 rounded-2xl shadow-md p-6 max-w-4xl">
+
+        <h2 class="text-xl font-bold text-base-content mb-4">Cards</h2>
+
+        <div class="flex flex-row gap-6">
+
+          <!-- Esquerda: card azul + seta + barra -->
+          <div class="w-3/5 flex flex-col gap-4">
+
+            <!-- setas + cartão -->
+            <div class="flex flex-row items-center gap-3">
+              <!-- cartão azul -->
+              <div
+                class="relative flex-1 rounded-[20px] shadow-lg text-primary-content overflow-hidden bg-primary"
+                style="min-height: 185px;"
+              >
+                <!-- nuvem decorativa -->
+                <div class="absolute right-[-30px] bottom-[-50px] w-56 h-56 rounded-full opacity-20 bg-white"></div>
+                <div class="absolute right-[30px] bottom-[-70px] w-72 h-52 rounded-full opacity-10 bg-white"></div>
+
+                <div class="relative p-5 flex flex-col gap-4">
+                  <!-- header -->
+                  <div>
+                    <h3 class="text-sm font-bold tracking-wide">pagaAi</h3>
+                    <p class="text-[9px] uppercase tracking-[0.2em] opacity-70">Premium account</p>
+                  </div>
+
+                  <!-- número do cartão -->
+                  <p class="text-xl font-semibold tracking-[0.25em]">
+                    {{ cardProjection?.pan || '5789  ****  ****  2847' }}
+                  </p>
+
+                  <!-- rodapé: titular + validade -->
+                  <div class="flex flex-row gap-8 items-end">
+                    <div>
+                      <p class="text-[9px] uppercase tracking-[0.15em] opacity-70">Card holder</p>
+                      <p class="text-xs font-semibold">{{ userProjection?.username || 'Mike Smith' }}</p>
+                    </div>
+                    <div>
+                      <p class="text-[9px] uppercase tracking-[0.15em] opacity-70">Expire date</p>
+                      <p class="text-xs font-semibold">{{ cardProjection?.expiry || '06/21' }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
           </div>
-          <div class="mt-2 space-y-1">
-            <p class="text-[11px] uppercase tracking-[0.18em] opacity-80">Balance</p>
-            <p class="text-2xl font-bold">R$ 2.000,02</p>
+
+          <!-- separador -->
+          <div class="divider divider-horizontal"></div>
+
+          <!-- Direita: saldo, income, outcome, toggle -->
+          <div class="w-2/5 flex flex-col justify-center gap-5 pl-2">
+
+            <!-- Current balance -->
+            <div>
+              <p class="text-3xl font-bold text-primary">
+                R$ {{ userProjection?.userAccount?.cachedBalance ?? '0,00' }}
+              </p>
+              <p class="text-xs text-base-content/60">Current balance</p>
+            </div>
+
           </div>
+
         </div>
       </div>
+
     </main>
 
   </div>

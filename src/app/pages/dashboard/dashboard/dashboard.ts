@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service';
 import {ThemeService} from '../../../core/services/theme-service';
 import {CommonModule} from '@angular/common';
-import {DashboardResponse, UserProjection} from '../../../core/models/DashboardResponse';
+import {CardProjection, DashboardResponse, UserProjection} from '../../../core/models/DashboardResponse';
 import {DashboardService} from '../../../core/services/dashboard-service';
 import {data} from 'autoprefixer';
 
@@ -15,6 +15,8 @@ import {data} from 'autoprefixer';
 })
 export class Dashboard implements OnInit{
   userProjection: UserProjection | null = null;
+  cardProjection: CardProjection | null = null;
+  cardNumber: string | null = null;
   readonly lightTheme = "light";
   readonly blackTheme = "black";
   sidebarOpen = false;
@@ -36,10 +38,16 @@ export class Dashboard implements OnInit{
 
   ngOnInit():void{
     this.dashboardService.getUserProjection().subscribe({
-      next: (data: DashboardResponse) => {
-        this.userProjection = data.userProjection;
+      next: (data: UserProjection) => {
+        this.userProjection = data;
       },
       error: (err) => console.error(err),
+    });
+    this.dashboardService.getCardProjection().subscribe({
+      next: (data: DashboardResponse) => {
+        this.cardProjection = data.cardProjection;
+      },
+      error: (error) => console.error(error),
     });
   }
 

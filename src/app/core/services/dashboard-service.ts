@@ -11,7 +11,10 @@ export class DashboardService {
   private readonly baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {
   }
-  getUserProjection(): Observable<DashboardResponse>{
+  getUserProjection(): Observable<UserProjection>{
+    return this.http.get<UserProjection>(`${this.baseUrl}/api/v1/user`);
+  }
+  getCardProjection(): Observable<DashboardResponse>{
     return this.http.get<DashboardResponse>(`${this.baseUrl}/api/v1/dashboard`);
   }
 }

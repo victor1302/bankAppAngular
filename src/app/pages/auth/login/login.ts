@@ -19,6 +19,7 @@ import {ThemeService} from '../../../core/services/theme-service';
 export class Login {
   readonly lightTheme = 'light';
   readonly blackTheme = 'black';
+  loginError = false;
 
   loginForm: FormGroup;
 
@@ -44,7 +45,9 @@ export class Login {
         this.authService.setToken(res.token);
         this.router.navigate(['/home']);
       },
-      error: (err) => console.error('Error', err),
+      error: () => {
+        this.loginError = true;
+      }
     });
   }
 
